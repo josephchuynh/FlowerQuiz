@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+   <string-array name="groups_list">
+      <item>Callas</item>
+      <item>Exortic</item>
+      <item>Orchids</item>
+      <item>Roses</item>
+      <item>Tropicals</item>
+      <item>Tulips</item>
+   </string-array>
+
+   <string-array name="groups_list_for_settings">
+      <item>Callas</item>
+      <item>Exortic</item>
+      <item>Orchids</item>
+      <item>Roses</item>
+      <item>Tropicals</item>
+      <item>Tulips</item>
+   </string-array>
+
+   <string-array name="guesses_list">
+      <item>2</item>
+      <item>4</item>
+      <item>6</item>
+      <item>8</item>
+   </string-array>
+
+</resources>
