@@ -14,9 +14,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.Set;
+import android.media.MediaPlayer;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
    // keys for reading data from SharedPreferences
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
    private boolean phoneDevice = true; // used to force portrait mode
    private boolean preferencesChanged = true; // did preferences change?
+
+   MediaPlayer player;
 
    // configure the MainActivity
    @Override
@@ -55,6 +60,20 @@ public class MainActivity extends AppCompatActivity {
       if (phoneDevice)
          setRequestedOrientation(
             ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+      Button button9=(Button)findViewById(R.id.button9); // Start sound button
+      Button button10=(Button)findViewById(R.id.button10); // Stop sound button
+      button9.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+            player=MediaPlayer.create(MainActivity.this,R.raw.blue_noise);
+            player.start();
+        }});
+      button10.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v){
+            player.pause();}});
+
    }
 
    // called after onCreate completes execution

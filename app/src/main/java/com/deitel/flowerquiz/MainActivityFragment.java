@@ -18,6 +18,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.DialogFragment;
@@ -58,6 +59,7 @@ public class MainActivityFragment extends Fragment {
    private LinearLayout[] guessLinearLayouts; // rows of answer Buttons
    private TextView answerTextView; // displays correct answer
 
+   MediaPlayer player;
    // configures the MainActivityFragment when its View is created
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -286,6 +288,7 @@ public class MainActivityFragment extends Fragment {
    private OnClickListener guessButtonListener = new OnClickListener() {
       @Override
       public void onClick(View v) {
+         player=MediaPlayer.create(getContext(),R.raw.blue_noise);
          Button guessButton = ((Button) v);
          String guess = guessButton.getText().toString();
          String answer = getCountryName(correctAnswer);
@@ -298,10 +301,8 @@ public class MainActivityFragment extends Fragment {
             answerTextView.setText(answer + "!");
             answerTextView.setTextColor(
                getResources().getColor(R.color.correct_answer,
-                  getContext().getTheme()));
-
+               getContext().getTheme()));
             disableButtons(); // disable all guess Buttons
-
             // if the user has correctly identified FLAGS_IN_QUIZ flags
             if (correctAnswers == FLAGS_IN_QUIZ) {
                // DialogFragment to display quiz stats and start new quiz
@@ -326,7 +327,7 @@ public class MainActivityFragment extends Fragment {
                               }
                            }
                         );
-
+                        player.start();
                         return builder.create(); // return the AlertDialog
                      }
                   };
@@ -337,13 +338,15 @@ public class MainActivityFragment extends Fragment {
             }
             else { // answer is correct but quiz is not over
                // load the next flag after a 2-second delay
+            //   player.start();
                handler.postDelayed(
                   new Runnable() {
                      @Override
                      public void run() {
                         animate(true); // animate the flag off the screen
                      }
-                  }, 2000); // 2000 milliseconds for 2-second delay
+                  }, 3000); // 3000 milliseconds for 3-second delay
+            //   player.pause();
             }
          }
          else { // answer was incorrect
@@ -355,6 +358,7 @@ public class MainActivityFragment extends Fragment {
                R.color.incorrect_answer, getContext().getTheme()));
             guessButton.setEnabled(false); // disable incorrect answer
          }
+
       }
    };
 
